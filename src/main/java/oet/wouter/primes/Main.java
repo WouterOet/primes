@@ -73,11 +73,10 @@ public class Main {
     }
 
     private static void appendHeader(StringBuilder builder) {
-        String s = " ";
         builder.append("<svg version=\"1.1\" baseProfile=\"full\" width=\"")
                 .append(DIMENSION)
                 .append("\" height=\"")
-                .append(DIMENSION).append(s).append("\"xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: black\">");
+                .append(DIMENSION).append("\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: black\">");
     }
 
     private static void appenFooter(StringBuilder builder) {
