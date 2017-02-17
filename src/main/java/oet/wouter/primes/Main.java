@@ -47,7 +47,7 @@ public class Main {
 
             print(x, -y, "" + prime, prime, buffer);
         }
-        appenFooter(buffer);
+        appendFooter(buffer);
         String data = buffer.toString();
 
         Files.write(Paths.get("/home/wouter/primes.svg"), Collections.singleton(data));
@@ -76,7 +76,7 @@ public class Main {
                 .append("\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: black\">");
     }
 
-    private static void appenFooter(StringBuilder builder) {
+    private static void appendFooter(StringBuilder builder) {
         builder.append("</svg> \n");
     }
 }
