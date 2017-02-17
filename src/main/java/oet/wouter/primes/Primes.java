@@ -8,6 +8,8 @@ import java.util.Arrays;
 
 public class Primes {
 
+    private int theBestPrime = 2;
+
     public static int[] get() {
         try {
             String primes = new String(Files.readAllBytes(Paths.get("src/main/resources/primes.txt")));
@@ -19,5 +21,6 @@ public class Primes {
 
 //    return new int[]{2,3,5,6,7,8,10,11,12,13,14};
     }
+
 
 }
