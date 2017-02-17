@@ -41,7 +41,7 @@ public class Main {
             int value = prime - previousSquared;
             double angle = (0.0 + value)/range;
 
-            double radius = a * (current-1) + (angle * a);
+            double radius = getRadius(a, current, angle);
             double x = radius * Math.cos(angle * 2 * Math.PI);
             double y = radius * Math.sin(angle * 2 * Math.PI);
 
@@ -50,7 +50,11 @@ public class Main {
         appendFooter(buffer);
         String data = buffer.toString();
 
-        Files.write(Paths.get("/home/wouter/primes.svg"), Collections.singleton(data));
+        Files.write(Paths.get("src/main/resources/primes.svg"), Collections.singleton(data));
+    }
+
+    private static double getRadius(double a, int current, double angle) {
+        return a * (current-1) + (angle * a);
     }
 
     private static void print(double x, double y, String comment, int prime, StringBuilder buffer) {
@@ -72,8 +76,7 @@ public class Main {
         builder.append("<svg version=\"1.1\" baseProfile=\"full\" width=\"")
                 .append(DIMENSION)
                 .append("\" height=\"")
-                .append(DIMENSION)
-                .append("\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: black\">");
+                .append(DIMENSION).append("\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: black\">");
     }
 
     private static void appendFooter(StringBuilder builder) {
