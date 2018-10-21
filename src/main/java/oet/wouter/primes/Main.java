@@ -10,8 +10,8 @@ public class Main {
 
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.00");
     private static final int DIMENSION = 2000;
-    private static final int X_OFFSET=DIMENSION/2;
-    private static final int Y_OFFSET=DIMENSION/2;
+    private static final int X_OFFSET = DIMENSION / 2;
+    private static final int Y_OFFSET = DIMENSION / 2;
 
     public static void main(String[] args) throws IOException {
         StringBuilder buffer = new StringBuilder();
@@ -30,18 +30,18 @@ public class Main {
 
         for (int i = 0; i < 20000; i++) {
             int prime = primes[i];
-            if(prime > currentSquared) {
+            if (prime > currentSquared) {
                 previousSquared = currentSquared;
                 current++;
-                currentSquared = current*current;
+                currentSquared = current * current;
 //                print(current*a, 0 , "grey", ""+currentSquared, buffer);
             }
 
             int range = currentSquared - previousSquared;
             int value = prime - previousSquared;
-            double angle = (0.0 + value)/range;
+            double angle = (0.0 + value) / range;
 
-            double radius = a * (current-1) + (angle * a);
+            double radius = a * (current - 1) + (angle * a);
             double x = radius * Math.cos(angle * 2 * Math.PI);
             double y = radius * Math.sin(angle * 2 * Math.PI);
 
@@ -57,13 +57,14 @@ public class Main {
         String xx = DECIMAL_FORMAT.format(x + X_OFFSET);
         String yy = DECIMAL_FORMAT.format(y + Y_OFFSET);
 
-        int hue = (int) (2.0 / 3 * Math.sqrt(prime) + 100);
+//        int hue = (int) (2.0 / 3 * Math.sqrt(prime) + 100);
+        int hue = ((int) (Math.sqrt(x * x + y * y) / (DIMENSION / 2) * 360) + 100) % 360;
         buffer.append("<circle cx=\"")
                 .append(xx)
                 .append("\" cy=\"")
                 .append(yy)
                 .append("\" r=\"2\" ")
-                .append("style=\"fill:hsl(").append(hue).append(", 50%, 50%)\"")
+                .append("style=\"fill:hsl(").append(hue).append(", 75%, 50%)\"")
                 .append(" />")//.append("<text x=\"").append(x+X_OFFSET).append("\" y=\"").append(y+Y_OFFSET).append("\" font-family=\"Verdana\" font-size=\"10\">").append(comment).append("</text>")
                 .append('\n');
     }
@@ -73,7 +74,8 @@ public class Main {
                 .append(DIMENSION)
                 .append("\" height=\"")
                 .append(DIMENSION)
-                .append("\" xmlns=\"http://www.w3.org/2000/svg\" style=\"background-color: black\">");
+                .append("\" xmlns=\"http://www.w3.org/2000/svg\">")
+                .append("<rect width=\"" + DIMENSION + "\" height=\"" + DIMENSION + "\" style=\"fill:hsl(0,100%,0%);\" />");
     }
 
     private static void appendFooter(StringBuilder builder) {
